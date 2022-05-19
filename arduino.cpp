@@ -16,17 +16,22 @@
 #define LCD_WIDTH 64
 
 CRGB leds[NUM_LEDS];
-void setup() {
-    FastLED.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);    
-    Serial.begin(9600);    
-}
 
-void loop() {    
+char ch1 ,ch2  ,ch3 ,ch4;
+            
+void setup() {
+    FastLED.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);        
+    Serial.begin(9600);    
+    char t[] = __TIME__  ;
+    ch1 = t[0];
+    ch2 = t[1] ;
+    ch3 = t[3] ;
+    ch4 = t[4] ;
+
+    // Display name   
+    /*
       int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
             third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
-
-      // Display name   
-      /*
       Draw_P(fourth_monitor_address);
       FastLED.show();  
       delay (DELAY) ;
@@ -131,26 +136,49 @@ void loop() {
       Draw_A(first_monitor_address);            
       FastLED.show();  
       delay (DELAY) ;
-      FastLED.clear();  
-      */ 
+      FastLED.clear(); 
+      */
+
+    pinMode(13,OUTPUT);
+
+    setClockDisplay();
+}
+
+void loop() {    
       
      // Display clock      
+      int d = digitalRead(13);      
+      if (d == HIGH ) {
+        Serial.println("hello");        
+        if(ch4 == '9'){
+          ch4 = '0' ;
+          ch3 = ch3 + 1 ; 
+          if(ch3 == '6'){
+            ch3 == '0';                        
+          } 
+        } else {
+          ch4 = ch4 + 1 ;           
+        }        
 
-      char t[] = __TIME__ ;          
-      Serial.println(t);
-//      Serial.print(t[1]);      
-
-//      Serial.print(t[3]);
-//      Serial.print(t[4]);
-      delay(1000);
-      
-      addDigit(t[0] , first_monitor_address ) ;
-      addDigit(t[1] , second_monitor_address ) ;
-      addDigit(t[3] , third_monitor_address ) ;
-      addDigit(t[4] , fourth_monitor_address ) ;
-      
-      delay(1000);
+        setClockDisplay();
+        Serial.println(ch4);
+      }            
+      delay(80);
         
+}
+
+void setClockDisplay(){
+  int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
+            third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
+
+  FastLED.clear();         
+      
+  addDigit(ch1 , first_monitor_address ) ;
+  addDigit(ch2 , second_monitor_address ) ;
+  addDigit(ch3 , third_monitor_address ) ;
+  addDigit(ch4 , fourth_monitor_address ) ; 
+
+  FastLED.show();
 }
 
 void addDigit(char num, int lcd){
@@ -257,7 +285,7 @@ void Draw_8(int pos){
 }
 
 void Draw_5(int pos){
-  Draw_S(0);
+  Draw_S(pos);
 }
 
 void Draw_4(int pos){
@@ -303,7 +331,7 @@ void Draw_2 (int pos) {
 }
 
 void Draw_1(int pos){
-  Draw_I(0);
+  Draw_I(pos);
 }
 
 void Draw_0 (int pos){
