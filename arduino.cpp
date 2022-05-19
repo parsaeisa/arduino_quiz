@@ -140,6 +140,10 @@ void setup() {
       */
 
     pinMode(13,OUTPUT);
+    pinMode(12,OUTPUT);
+
+    pinMode(11,OUTPUT);
+    pinMode(10,OUTPUT);
 
     setClockDisplay();
 }
@@ -147,9 +151,15 @@ void setup() {
 void loop() {    
       
      // Display clock      
-      int d = digitalRead(13);      
-      if (d == HIGH ) {
-        Serial.println("hello");        
+      int inc = digitalRead(13);      
+      int dec = digitalRead(12);      
+
+      int h_inc = digitalRead(11);      
+      int h_dec = digitalRead(10);      
+
+      
+      if (inc == HIGH ) {
+        Serial.println("minute increased");        
         if(ch4 == '9'){
           ch4 = '0' ;
           ch3 = ch3 + 1 ; 
@@ -162,7 +172,62 @@ void loop() {
 
         setClockDisplay();
         Serial.println(ch4);
-      }            
+      }                  
+
+      if (dec == HIGH ) {
+        Serial.println("minute decreased");        
+        if(ch4 == '0'){
+          ch4 = '9' ;          
+          if(ch3 == '0'){
+            ch3 == '9';                        
+          } else {
+            ch3 = ch3 - 1 ; 
+          }
+        } else {
+          ch4 = ch4 - 1 ;           
+        }        
+
+        setClockDisplay();
+        Serial.println(ch4);
+      }   
+
+      if (h_inc == HIGH ) {
+        Serial.println("hour increased");        
+
+        if(ch2 == '3' && ch1=='2'){
+          ch1 = '0' ;
+          ch2 = '0' ;
+        } else if(ch2 == '9'){
+          ch2 = '0' ;
+          ch1 = ch1 + 1 ; 
+        } else 
+          ch2 = ch2 + 1 ;  
+
+
+        setClockDisplay();
+        Serial.println(ch4);
+      }                  
+
+      if (h_dec == HIGH ) {
+        Serial.println("hour decreased");        
+        
+        if(ch2 == '0' && ch1=='0'){
+          ch1 = '2' ;
+          ch2 = '3' ;
+        } else if(ch2 == '0'){
+          ch2 = '9' ;          
+          if(ch1 == '0'){
+            ch1 == '9';                        
+          } else {
+            ch1 = ch3 - 1 ; 
+          }
+        } else {
+          ch2 = ch2 - 1 ;           
+        }        
+
+        setClockDisplay();
+        Serial.println(ch4);
+      }   
       delay(80);
         
 }
