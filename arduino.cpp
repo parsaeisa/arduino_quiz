@@ -15,10 +15,116 @@ void setup() {
 }
 
 void loop() {
-      // Display name 
-     int lcd_address = 3 , offset = 3 ;
-     int first_letter_index  ;
-    
+      // Display name      
+      int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
+            third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
+        
+      Draw_P(fourth_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_A(fourth_monitor_address);
+      Draw_P(third_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_R(fourth_monitor_address);
+      Draw_A(third_monitor_address);
+      Draw_P(second_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_S(fourth_monitor_address);
+      Draw_R(third_monitor_address);
+      Draw_A(second_monitor_address);
+      Draw_P(first_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_A(fourth_monitor_address);
+      Draw_S(third_monitor_address);
+      Draw_R(second_monitor_address);
+      Draw_A(first_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_E(fourth_monitor_address);
+      Draw_A(third_monitor_address);
+      Draw_S(second_monitor_address);
+      Draw_R(first_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_I(fourth_monitor_address);
+      Draw_E(third_monitor_address);
+      Draw_A(second_monitor_address);
+      Draw_S(first_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_S(fourth_monitor_address);
+      Draw_I(third_monitor_address);
+      Draw_E(second_monitor_address);
+      Draw_A(first_monitor_address);
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_A(fourth_monitor_address);
+      Draw_S(third_monitor_address);
+      Draw_I(second_monitor_address);
+      Draw_E(first_monitor_address);      
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_Z(fourth_monitor_address);      
+      Draw_A(third_monitor_address);
+      Draw_S(second_monitor_address);
+      Draw_I(first_monitor_address);      
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_A(fourth_monitor_address);      
+      Draw_Z(third_monitor_address);      
+      Draw_A(second_monitor_address);
+      Draw_S(first_monitor_address);      
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_D(fourth_monitor_address);      
+      Draw_A(third_monitor_address);      
+      Draw_Z(second_monitor_address);      
+      Draw_A(first_monitor_address);      
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_E(fourth_monitor_address);      
+      Draw_D(third_monitor_address);      
+      Draw_A(second_monitor_address);      
+      Draw_Z(first_monitor_address);            
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+
+      Draw_H(fourth_monitor_address);            
+      Draw_E(third_monitor_address);      
+      Draw_D(second_monitor_address);      
+      Draw_A(first_monitor_address);            
+      FastLED.show();  
+      delay (DELAY) ;
+      FastLED.clear();   
+    /*
      while( lcd_address >= 0) {
       first_letter_index = lcd_address* LCD_WIDTH + offset ;
       
@@ -40,7 +146,8 @@ void loop() {
       delay (DELAY) ;
       FastLED.clear();   
      }
-
+      */ 
+      
      // Display clock 
      /*
       Draw_7(128);
@@ -183,9 +290,6 @@ void Draw_H (int pos){
     leds[pos +24 + i] = COLOR ;
   }
 
-  FastLED.show();
-  delay (DELAY) ;
-  FastLED.clear();
 }
 
 void Draw_D (int pos){
@@ -198,18 +302,13 @@ void Draw_D (int pos){
     leds[pos +i*8+6] = COLOR ;
   }
 
-  FastLED.show();
-  delay (DELAY) ;
-  FastLED.clear();
 }
 
 void Draw_I (int pos ) {
   for(int i =0 ; i<7 ; i++)
     leds[pos + i*8] = COLOR ; 
 
-  FastLED.show();
-  delay (DELAY) ;
-  FastLED.clear();
+//  FastLED.show();
 }
 
 void Draw_Z (int pos) { 
@@ -224,9 +323,6 @@ void Draw_Z (int pos) {
         }
      } 
 
-  FastLED.show();
-  delay (DELAY) ;
-  FastLED.clear();
 }
 
 void Draw_E (int pos) {
@@ -242,9 +338,6 @@ void Draw_E (int pos) {
   for(int i =0 ; i<5 ; i++)
        leds[pos +48 + i] = COLOR;
 
-  FastLED.show();
-  delay (DELAY) ;
-  FastLED.clear();
 }
 
 void Draw_S (int pos) {
@@ -259,9 +352,6 @@ void Draw_S (int pos) {
      for(int i =0 ; i<5 ; i++)
          leds[pos +48 + i] = COLOR;
 
-     FastLED.show();
-     delay (DELAY) ;
-     FastLED.clear();
 }
 
 void Draw_A (int pos ) {
@@ -275,9 +365,6 @@ void Draw_A (int pos ) {
     leds[pos+i*8] = COLOR;     
     leds[pos+i*8 + 4] = COLOR;
   }
-  FastLED.show();
-//  delay (DELAY) ;
-  //FastLED.clear();   
 }
 
 void Draw_P (int pos) {
@@ -293,9 +380,6 @@ void Draw_P (int pos) {
   for (int i =0 ; i<4; i++ )
     leds[pos + i*8 + 4] = COLOR;
     
-  FastLED.show();
-  //delay (DELAY) ;
-  //FastLED.clear();   
 }
 
 void Draw_R ( int pos ) { 
@@ -310,7 +394,4 @@ void Draw_R ( int pos ) {
     leds[pos+i*8 + 4] = COLOR;
   }
   leds[pos + 28] = CRGB::Black ;  
-  FastLED.show();
-  delay (DELAY) ;
-  FastLED.clear(); 
 }
