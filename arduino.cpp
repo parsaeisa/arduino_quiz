@@ -29,115 +29,115 @@ void setup() {
     ch4 = t[4] ;
 
     // Display name   
-    /*
-      int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
-            third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
-      Draw_P(fourth_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    
+    int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
+          third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
+    Draw_P(fourth_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_A(fourth_monitor_address);
-      Draw_P(third_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_A(fourth_monitor_address);
+    Draw_P(third_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_R(fourth_monitor_address);
-      Draw_A(third_monitor_address);
-      Draw_P(second_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_R(fourth_monitor_address);
+    Draw_A(third_monitor_address);
+    Draw_P(second_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_S(fourth_monitor_address);
-      Draw_R(third_monitor_address);
-      Draw_A(second_monitor_address);
-      Draw_P(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_S(fourth_monitor_address);
+    Draw_R(third_monitor_address);
+    Draw_A(second_monitor_address);
+    Draw_P(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_A(fourth_monitor_address);
-      Draw_S(third_monitor_address);
-      Draw_R(second_monitor_address);
-      Draw_A(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_A(fourth_monitor_address);
+    Draw_S(third_monitor_address);
+    Draw_R(second_monitor_address);
+    Draw_A(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_E(fourth_monitor_address);
-      Draw_A(third_monitor_address);
-      Draw_S(second_monitor_address);
-      Draw_R(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_E(fourth_monitor_address);
+    Draw_A(third_monitor_address);
+    Draw_S(second_monitor_address);
+    Draw_R(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_I(fourth_monitor_address);
-      Draw_E(third_monitor_address);
-      Draw_A(second_monitor_address);
-      Draw_S(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_I(fourth_monitor_address);
+    Draw_E(third_monitor_address);
+    Draw_A(second_monitor_address);
+    Draw_S(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_S(fourth_monitor_address);
-      Draw_I(third_monitor_address);
-      Draw_E(second_monitor_address);
-      Draw_A(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_S(fourth_monitor_address);
+    Draw_I(third_monitor_address);
+    Draw_E(second_monitor_address);
+    Draw_A(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_A(fourth_monitor_address);
-      Draw_S(third_monitor_address);
-      Draw_I(second_monitor_address);
-      Draw_E(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_A(fourth_monitor_address);
+    Draw_S(third_monitor_address);
+    Draw_I(second_monitor_address);
+    Draw_E(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_Z(fourth_monitor_address);      
-      Draw_A(third_monitor_address);
-      Draw_S(second_monitor_address);
-      Draw_I(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_Z(fourth_monitor_address);      
+    Draw_A(third_monitor_address);
+    Draw_S(second_monitor_address);
+    Draw_I(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_A(fourth_monitor_address);      
-      Draw_Z(third_monitor_address);      
-      Draw_A(second_monitor_address);
-      Draw_S(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_A(fourth_monitor_address);      
+    Draw_Z(third_monitor_address);      
+    Draw_A(second_monitor_address);
+    Draw_S(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_D(fourth_monitor_address);      
-      Draw_A(third_monitor_address);      
-      Draw_Z(second_monitor_address);      
-      Draw_A(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_D(fourth_monitor_address);      
+    Draw_A(third_monitor_address);      
+    Draw_Z(second_monitor_address);      
+    Draw_A(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_E(fourth_monitor_address);      
-      Draw_D(third_monitor_address);      
-      Draw_A(second_monitor_address);      
-      Draw_Z(first_monitor_address);            
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
+    Draw_E(fourth_monitor_address);      
+    Draw_D(third_monitor_address);      
+    Draw_A(second_monitor_address);      
+    Draw_Z(first_monitor_address);            
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
 
-      Draw_H(fourth_monitor_address);            
-      Draw_E(third_monitor_address);      
-      Draw_D(second_monitor_address);      
-      Draw_A(first_monitor_address);            
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear(); 
-      */
+    Draw_H(fourth_monitor_address);            
+    Draw_E(third_monitor_address);      
+    Draw_D(second_monitor_address);      
+    Draw_A(first_monitor_address);            
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear(); 
+      
 
     pinMode(13,OUTPUT);
     pinMode(12,OUTPUT);
