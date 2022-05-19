@@ -1,5 +1,11 @@
 #include "FastLED.h"
 
+//#include <iostream>  
+//#include <string>  
+
+//using namespace std; 
+
+// Constant variables 
 #define NUM_LEDS 256
 
 #define DATA_PIN 6
@@ -11,14 +17,16 @@
 
 CRGB leds[NUM_LEDS];
 void setup() {
-    FastLED.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);
+    FastLED.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);    
+    Serial.begin(9600);    
 }
 
-void loop() {
-      // Display name      
+void loop() {    
       int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
             third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
-        
+
+      // Display name   
+      /*
       Draw_P(fourth_monitor_address);
       FastLED.show();  
       delay (DELAY) ;
@@ -123,42 +131,71 @@ void loop() {
       Draw_A(first_monitor_address);            
       FastLED.show();  
       delay (DELAY) ;
-      FastLED.clear();   
-    /*
-     while( lcd_address >= 0) {
-      first_letter_index = lcd_address* LCD_WIDTH + offset ;
-      
-      
-      
-      Draw_P( first_letter_index);
-      if (lcd_address<=2)
-        Draw_A( first_letter_index+LCD_WIDTH );
-      if (lcd_address<=1)
-        Draw_R( first_letter_index+ 2 * LCD_WIDTH );
-
-
-        
-      offset -- ; 
-      if(offset  == -1){
-       lcd_address -- ;
-       offset = 3 ;  
-      }        
-      delay (DELAY) ;
-      FastLED.clear();   
-     }
+      FastLED.clear();  
       */ 
       
-     // Display clock 
-     /*
-      Draw_7(128);
-      delay(1000);
-      FastLED.clear();
-      Draw_8(128);
+     // Display clock      
 
-      delay(1000);
-      FastLED.clear();
-      */
+      char t[] = __TIME__ ;          
+      Serial.println(t);
+//      Serial.print(t[1]);      
 
+//      Serial.print(t[3]);
+//      Serial.print(t[4]);
+      delay(1000);
+      
+      addDigit(t[0] , first_monitor_address ) ;
+      addDigit(t[1] , second_monitor_address ) ;
+      addDigit(t[3] , third_monitor_address ) ;
+      addDigit(t[4] , fourth_monitor_address ) ;
+      
+      delay(1000);
+        
+}
+
+void addDigit(char num, int lcd){
+  switch(num){
+    case '0' :
+      Draw_0(lcd);
+      break ;
+
+    case '1' :
+      Draw_1(lcd);
+      break ;
+
+    case '2' :
+      Draw_2(lcd);
+      break ;
+
+    case '3' :
+      Draw_3(lcd);
+      break ;
+
+    case '4' :
+      Draw_4(lcd);
+      break ;
+
+    case '5' :
+      Draw_5(lcd);
+      break ;
+
+    case '6' :
+      Draw_6(lcd);
+      break ;
+
+    case '7' :
+      Draw_7(lcd);
+      break ;
+
+    case '8' :
+      Draw_8(lcd);
+      break ;
+
+    case '9' :
+      Draw_9(lcd);
+      break ;
+     
+  }
 }
 
 void Draw_7(int pos){
