@@ -1,5 +1,11 @@
 #include "FastLED.h"
 
+//#include <iostream>  
+//#include <string>  
+
+//using namespace std; 
+
+// Constant variables 
 #define NUM_LEDS 256
 
 #define DATA_PIN 6
@@ -10,155 +16,279 @@
 #define LCD_WIDTH 64
 
 CRGB leds[NUM_LEDS];
+
+char ch1 ,ch2  ,ch3 ,ch4;
+            
 void setup() {
-    FastLED.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);
+    FastLED.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);        
+    Serial.begin(9600);    
+    char t[] = __TIME__  ;
+    ch1 = t[0];
+    ch2 = t[1] ;
+    ch3 = t[3] ;
+    ch4 = t[4] ;
+
+    // Display name   
+    
+    int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
+          third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
+    Draw_P(fourth_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_A(fourth_monitor_address);
+    Draw_P(third_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_R(fourth_monitor_address);
+    Draw_A(third_monitor_address);
+    Draw_P(second_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_S(fourth_monitor_address);
+    Draw_R(third_monitor_address);
+    Draw_A(second_monitor_address);
+    Draw_P(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_A(fourth_monitor_address);
+    Draw_S(third_monitor_address);
+    Draw_R(second_monitor_address);
+    Draw_A(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_E(fourth_monitor_address);
+    Draw_A(third_monitor_address);
+    Draw_S(second_monitor_address);
+    Draw_R(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_I(fourth_monitor_address);
+    Draw_E(third_monitor_address);
+    Draw_A(second_monitor_address);
+    Draw_S(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_S(fourth_monitor_address);
+    Draw_I(third_monitor_address);
+    Draw_E(second_monitor_address);
+    Draw_A(first_monitor_address);
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_A(fourth_monitor_address);
+    Draw_S(third_monitor_address);
+    Draw_I(second_monitor_address);
+    Draw_E(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_Z(fourth_monitor_address);      
+    Draw_A(third_monitor_address);
+    Draw_S(second_monitor_address);
+    Draw_I(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_A(fourth_monitor_address);      
+    Draw_Z(third_monitor_address);      
+    Draw_A(second_monitor_address);
+    Draw_S(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_D(fourth_monitor_address);      
+    Draw_A(third_monitor_address);      
+    Draw_Z(second_monitor_address);      
+    Draw_A(first_monitor_address);      
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_E(fourth_monitor_address);      
+    Draw_D(third_monitor_address);      
+    Draw_A(second_monitor_address);      
+    Draw_Z(first_monitor_address);            
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear();   
+
+    Draw_H(fourth_monitor_address);            
+    Draw_E(third_monitor_address);      
+    Draw_D(second_monitor_address);      
+    Draw_A(first_monitor_address);            
+    FastLED.show();  
+    delay (DELAY) ;
+    FastLED.clear(); 
+      
+
+    pinMode(13,OUTPUT);
+    pinMode(12,OUTPUT);
+
+    pinMode(11,OUTPUT);
+    pinMode(10,OUTPUT);
+
+    setClockDisplay();
 }
 
-void loop() {
-      // Display name      
-      int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
+void loop() {    
+      
+     // Display clock      
+      int inc = digitalRead(13);      
+      int dec = digitalRead(12);      
+
+      int h_inc = digitalRead(11);      
+      int h_dec = digitalRead(10);      
+
+      
+      if (inc == HIGH ) {
+        Serial.println("minute increased");        
+        if(ch4 == '9'){
+          ch4 = '0' ;
+          ch3 = ch3 + 1 ; 
+          if(ch3 == '6'){
+            ch3 == '0';                        
+          } 
+        } else {
+          ch4 = ch4 + 1 ;           
+        }        
+
+        setClockDisplay();
+        Serial.println(ch4);
+      }                  
+
+      if (dec == HIGH ) {
+        Serial.println("minute decreased");        
+        if(ch4 == '0'){
+          ch4 = '9' ;          
+          if(ch3 == '0'){
+            ch3 == '9';                        
+          } else {
+            ch3 = ch3 - 1 ; 
+          }
+        } else {
+          ch4 = ch4 - 1 ;           
+        }        
+
+        setClockDisplay();
+        Serial.println(ch4);
+      }   
+
+      if (h_inc == HIGH ) {
+        Serial.println("hour increased");        
+
+        if(ch2 == '3' && ch1=='2'){
+          ch1 = '0' ;
+          ch2 = '0' ;
+        } else if(ch2 == '9'){
+          ch2 = '0' ;
+          ch1 = ch1 + 1 ; 
+        } else 
+          ch2 = ch2 + 1 ;  
+
+
+        setClockDisplay();
+        Serial.println(ch4);
+      }                  
+
+      if (h_dec == HIGH ) {
+        Serial.println("hour decreased");        
+        
+        if(ch2 == '0' && ch1=='0'){
+          ch1 = '2' ;
+          ch2 = '3' ;
+        } else if(ch2 == '0'){
+          ch2 = '9' ;          
+          if(ch1 == '0'){
+            ch1 == '9';                        
+          } else {
+            ch1 = ch3 - 1 ; 
+          }
+        } else {
+          ch2 = ch2 - 1 ;           
+        }        
+
+        setClockDisplay();
+        Serial.println(ch4);
+      }   
+      delay(80);
+        
+}
+
+void setClockDisplay(){
+  int first_monitor_address = 0 , second_monitor_address = LCD_WIDTH , 
             third_monitor_address = 2 * LCD_WIDTH , fourth_monitor_address = 3 * LCD_WIDTH ;    
-        
-      Draw_P(fourth_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
 
-      Draw_A(fourth_monitor_address);
-      Draw_P(third_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_R(fourth_monitor_address);
-      Draw_A(third_monitor_address);
-      Draw_P(second_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_S(fourth_monitor_address);
-      Draw_R(third_monitor_address);
-      Draw_A(second_monitor_address);
-      Draw_P(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_A(fourth_monitor_address);
-      Draw_S(third_monitor_address);
-      Draw_R(second_monitor_address);
-      Draw_A(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_E(fourth_monitor_address);
-      Draw_A(third_monitor_address);
-      Draw_S(second_monitor_address);
-      Draw_R(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_I(fourth_monitor_address);
-      Draw_E(third_monitor_address);
-      Draw_A(second_monitor_address);
-      Draw_S(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_S(fourth_monitor_address);
-      Draw_I(third_monitor_address);
-      Draw_E(second_monitor_address);
-      Draw_A(first_monitor_address);
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_A(fourth_monitor_address);
-      Draw_S(third_monitor_address);
-      Draw_I(second_monitor_address);
-      Draw_E(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_Z(fourth_monitor_address);      
-      Draw_A(third_monitor_address);
-      Draw_S(second_monitor_address);
-      Draw_I(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_A(fourth_monitor_address);      
-      Draw_Z(third_monitor_address);      
-      Draw_A(second_monitor_address);
-      Draw_S(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_D(fourth_monitor_address);      
-      Draw_A(third_monitor_address);      
-      Draw_Z(second_monitor_address);      
-      Draw_A(first_monitor_address);      
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_E(fourth_monitor_address);      
-      Draw_D(third_monitor_address);      
-      Draw_A(second_monitor_address);      
-      Draw_Z(first_monitor_address);            
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-
-      Draw_H(fourth_monitor_address);            
-      Draw_E(third_monitor_address);      
-      Draw_D(second_monitor_address);      
-      Draw_A(first_monitor_address);            
-      FastLED.show();  
-      delay (DELAY) ;
-      FastLED.clear();   
-    /*
-     while( lcd_address >= 0) {
-      first_letter_index = lcd_address* LCD_WIDTH + offset ;
+  FastLED.clear();         
       
-      
-      
-      Draw_P( first_letter_index);
-      if (lcd_address<=2)
-        Draw_A( first_letter_index+LCD_WIDTH );
-      if (lcd_address<=1)
-        Draw_R( first_letter_index+ 2 * LCD_WIDTH );
+  addDigit(ch1 , first_monitor_address ) ;
+  addDigit(ch2 , second_monitor_address ) ;
+  addDigit(ch3 , third_monitor_address ) ;
+  addDigit(ch4 , fourth_monitor_address ) ; 
 
+  FastLED.show();
+}
 
-        
-      offset -- ; 
-      if(offset  == -1){
-       lcd_address -- ;
-       offset = 3 ;  
-      }        
-      delay (DELAY) ;
-      FastLED.clear();   
-     }
-      */ 
-      
-     // Display clock 
-     /*
-      Draw_7(128);
-      delay(1000);
-      FastLED.clear();
-      Draw_8(128);
+void addDigit(char num, int lcd){
+  switch(num){
+    case '0' :
+      Draw_0(lcd);
+      break ;
 
-      delay(1000);
-      FastLED.clear();
-      */
+    case '1' :
+      Draw_1(lcd);
+      break ;
 
+    case '2' :
+      Draw_2(lcd);
+      break ;
+
+    case '3' :
+      Draw_3(lcd);
+      break ;
+
+    case '4' :
+      Draw_4(lcd);
+      break ;
+
+    case '5' :
+      Draw_5(lcd);
+      break ;
+
+    case '6' :
+      Draw_6(lcd);
+      break ;
+
+    case '7' :
+      Draw_7(lcd);
+      break ;
+
+    case '8' :
+      Draw_8(lcd);
+      break ;
+
+    case '9' :
+      Draw_9(lcd);
+      break ;
+     
+  }
 }
 
 void Draw_7(int pos){
@@ -220,7 +350,7 @@ void Draw_8(int pos){
 }
 
 void Draw_5(int pos){
-  Draw_S(0);
+  Draw_S(pos);
 }
 
 void Draw_4(int pos){
@@ -266,7 +396,7 @@ void Draw_2 (int pos) {
 }
 
 void Draw_1(int pos){
-  Draw_I(0);
+  Draw_I(pos);
 }
 
 void Draw_0 (int pos){
